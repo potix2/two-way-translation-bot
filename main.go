@@ -59,6 +59,9 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (events
 				if e != nil {
 					return events.APIGatewayProxyResponse{StatusCode: 500}, e
 				}
+				if ev.ThreadTimeStamp != "" {
+					postParams.ThreadTimestamp = ev.ThreadTimeStamp
+				}
 				api.PostMessage(ev.Channel, translatedText, postParams)
 			}
 		}
